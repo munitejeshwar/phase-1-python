@@ -1,4 +1,4 @@
-`
+
 #1.Name and age
 name=input("Enter your name:")
 age=int(input("Enter you age:"))
