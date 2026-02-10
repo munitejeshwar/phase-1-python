@@ -54,8 +54,8 @@ def calculate_result(student):
 
 def save_to_file(student):
     try:
-        with open(FILE_NAME, "a") as f:
-            f.write(str(student) + "\n")
+        with open(FILE_NAME, "a") as k:
+            k.write(str(student) + "\n")
         print("Student data saved successfully.")
     except Exception as e:
         print("Error while saving to file:", e)
@@ -63,9 +63,10 @@ def save_to_file(student):
 
 def load_from_file():
     try:
-        with open(FILE_NAME, "r") as f:
+
+        with open(FILE_NAME, "r") as k:
             print("\nLoaded Records:")
-            for line in f:
+            for line in k:
                 print(line.strip())
     except FileNotFoundError:
         print("No records found. File does not exist.")

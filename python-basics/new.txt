@@ -1,0 +1,2 @@
+{'name': 'muni', 'marks': [10, 20, 30], 'total': 60, 'average': 20.0, 'result': 'fail'}
+{'name': 'mun', 'marks': [1, 100, 1000], 'total': 1101, 'average': 367.0, 'result': 'pass'}
