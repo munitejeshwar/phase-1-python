@@ -1,0 +1,183 @@
+FILE_NAME = "student.txt"
+
+
+# ---------------- LOAD ----------------
+def load_students():
+    students = {}
+
+    try:
+        with open(FILE_NAME, "r") as f:
+
+            for line in f:
+                line = line.strip()
+                parts = line.split(",")
+
+                sid = int(parts[0])
+                name = parts[1]
+
+                marks = []
+                i = 2
+                while i < len(parts):
+                    marks.append(int(parts[i]))
+                    i = i + 1
+
+                students[sid] = {"name": name, "marks": marks}
+
+    except FileNotFoundError:
+        pass
+
+    return students
+
+
+# ---------------- SAVE ----------------
+def save_students(students):
+
+    with open(FILE_NAME, "w") as f:
+
+        for sid in students:
+
+            name = students[sid]["name"]
+            marks = students[sid]["marks"]
+
+            line = str(sid) + "," + name
+
+            for m in marks:
+                line = line + "," + str(m)
+
+            f.write(line + "\n")
+
+
+# ---------------- GET NEXT ID ----------------
+def get_next_id(students):
+
+    if len(students) == 0:
+        return 1
+
+    max_id = 0
+    for sid in students:
+        if sid > max_id:
+            max_id = sid
+
+    return max_id + 1
+
+
+# ---------------- ADD ----------------
+def add_student(students):
+
+    name = input("Enter student name: ")
+
+    marks_input = input("Enter marks (space separated): ")
+    parts = marks_input.split()
+
+    marks = []
+    for p in parts:
+        marks.append(int(p))
+
+    sid = get_next_id(students)
+
+    students[sid] = {"name": name, "marks": marks}
+
+    print("Student added with ID", sid)
+
+
+# ---------------- UPDATE ----------------
+def update_student(students):
+
+    sid = int(input("Enter student ID to update: "))
+
+    if sid not in students:
+        print("Invalid ID")
+        return
+
+    marks_input = input("Enter new marks: ")
+    parts = marks_input.split()
+
+    marks = []
+    for p in parts:
+        marks.append(int(p))
+
+    students[sid]["marks"] = marks
+
+    print("Student updated")
+
+
+# ---------------- DELETE ----------------
+def delete_student(students):
+
+    sid = int(input("Enter student ID to delete: "))
+
+    if sid in students:
+        del students[sid]
+        print("Student deleted")
+    else:
+        print("Invalid ID")
+
+
+# ---------------- VIEW ----------------
+def view_students(students):
+
+    if len(students) == 0:
+        print("No students found")
+        return
+
+    for sid in students:
+
+        name = students[sid]["name"]
+        marks = students[sid]["marks"]
+
+        total = 0
+        for m in marks:
+            total = total + m
+
+        average = total / len(marks)
+
+        if average >= 40:
+            result = "Pass"
+        else:
+            result = "Fail"
+
+        print("ID:", sid,
+              "Name:", name,
+              "Marks:", marks,
+              "Average:", average,
+              result)
+
+
+# ---------------- MAIN ----------------
+def main():
+
+    students = load_students()
+
+    while True:
+
+        print("\n1. Add student")
+        print("2. Update student")
+        print("3. Delete student")
+        print("4. View students")
+        print("5. Exit")
+
+        choice = input("Choose: ")
+
+        if choice == "1":
+            add_student(students)
+            save_students(students)
+
+        elif choice == "2":
+            update_student(students)
+            save_students(students)
+
+        elif choice == "3":
+            delete_student(students)
+            save_students(students)
+
+        elif choice == "4":
+            view_students(students)
+
+        elif choice == "5":
+            break
+
+        else:
+            print("Invalid choice")
+
+
+main()

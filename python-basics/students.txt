@@ -1,0 +1,5 @@
+{'name': 'vinod', 'marks': [90, 80, 89], 'total': 259, 'average': 86.33333333333333, 'result': 'Pass'}
+{'name': 'muni', 'marks': [40, 60, 80], 'total': 180, 'average': 60.0, 'result': 'Pass'}
+{'name': 'raj', 'marks': [70, 10, 50], 'total': 130, 'average': 43.333333333333336, 'result': 'Pass'}
+{'name': 'ram', 'marks': [10, 50, 40], 'total': 100, 'average': 33.333333333333336, 'result': 'Fail'}
+{'name': 'muni', 'marks': [10, 40, 44], 'total': 94, 'average': 31.333333333333332, 'result': 'Fail'}
